@@ -2,29 +2,14 @@
 
 import * as z from "zod";
 import axios from "axios";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
 
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Link from "next/link";
 import toast from "react-hot-toast";
 
 import { ImageIcon, PencilIcon, PlusCircle } from "lucide-react";
 import { useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
 import { Course } from "@prisma/client";
 import Image from "next/image";
 import FileUpload from "@/components/FileUpload";
@@ -52,15 +37,6 @@ const ImageForm = ({ initialData, courseId }: ImageFormFormProps) => {
     resolver	Integrates with your preferred schema validation library.
     context	A context object to supply for your schema validation.
     */
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      imageUrl: initialData?.imageUrl || "",
-    },
-  });
-
-  // decontruct is submittung and isValid from form state
-  const { isSubmitting, isValid } = form.formState;
 
   // create a onSubmit func
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -119,7 +95,7 @@ const ImageForm = ({ initialData, courseId }: ImageFormFormProps) => {
             }}
           />
           <div className="text-xs text-muted-foreground mt-4">
-            16:9 aspect ration recommended
+            16:9 aspect ratio recommended
           </div>
         </div>
       )}
