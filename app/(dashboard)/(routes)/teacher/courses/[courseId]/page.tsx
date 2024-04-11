@@ -5,6 +5,10 @@ import { LayoutDashboard } from "lucide-react";
 import TitleForm from "./_components/TitleForm";
 import DescriptionForm from "./_components/DescriptionForm";
 import ImageForm from "./_components/ImageForm";
+// import CategoryForm from "./_components/CategoryForm";
+import { ListChecks, CircleDollarSign, File } from "lucide-react";
+import PriceForm from "./_components/PriceForm";
+import AttachmentForm from "./_components/AttahmentForm";
 
 interface CourseIdPageInterface {
   params: {
@@ -21,6 +25,19 @@ const CourseIdPage = async ({ params }: CourseIdPageInterface) => {
   const course = await db.course.findUnique({
     where: {
       id: params.courseId,
+    },
+    include: {
+      attachments: {
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
+    },
+  });
+
+  const categories = await db.category.findMany({
+    orderBy: {
+      name: "asc",
     },
   });
 
@@ -53,8 +70,8 @@ const CourseIdPage = async ({ params }: CourseIdPageInterface) => {
           </span>
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-        <div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6  mt-6 ">
+        <div className="">
           <div className="flex items-center gap-x-2">
             <LayoutDashboard></LayoutDashboard>
             <h2 className="text-xl">Customize your course</h2>
@@ -65,6 +82,32 @@ const CourseIdPage = async ({ params }: CourseIdPageInterface) => {
             courseId={course.id}
           ></DescriptionForm>
           <ImageForm initialData={course} courseId={course.id}></ImageForm>
+        </div>
+        <div className="space-y-6">
+          <div>
+            <div className="flex items-center gap-x-2">
+              <ListChecks />
+              <h2 className="text-xl">Course chapters</h2>
+            </div>
+            <div>Todo: Chapters</div>
+          </div>
+          <div className="flex items-center gap-x-2">
+            <CircleDollarSign />
+            <h2 className="text-xl">Sell Your Course</h2>
+          </div>
+          <div>
+            <PriceForm initialData={course} courseId={course.id} />
+          </div>
+          <div>
+            <div className="flex items-center gap-x-2">
+              <File />
+              <h2 className="text-xl">Resources</h2>
+            </div>
+            <AttachmentForm
+              initialData={course}
+              courseId={course.id}
+            ></AttachmentForm>
+          </div>
         </div>
       </div>
     </div>

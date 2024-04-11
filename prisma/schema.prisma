@@ -27,6 +27,8 @@ model Course {
   category Category? @relation(fields: [categoryId], references: [id])
   @@index([categoryId])
 
+  chapters Chapter[]
+
   attachments Attachment[]
 
   createdAt DateTime @default(now())
@@ -51,4 +53,52 @@ model Category {
   id String @id @default(uuid())
   name String @unique
   courses Course[]
+}
+
+model Chapter {
+  id String @id @default(uuid())
+  title String
+  description String? @db.Text
+  videoUrl String? @db.Text
+  position Int
+  isPublished Boolean @default(false)
+  isFree Boolean @default(false)
+
+  muxData MuxData?
+
+  courseId String
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  userPogress UserProgress[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([courseId])
+}
+
+model MuxData {
+  id String @id @default(uuid())
+  assetId String 
+  playbackId String?
+
+  chapterId String @unique
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  
+}
+
+model UserProgress {
+  id String @id @default(uuid())
+  userId String
+
+  chapterId String @unique
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  
+  isCompeted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([chapterId])
+  @@unique([userId, chapterId])
 }
