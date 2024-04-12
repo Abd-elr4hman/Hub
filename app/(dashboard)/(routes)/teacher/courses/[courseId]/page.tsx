@@ -9,6 +9,7 @@ import ImageForm from "./_components/ImageForm";
 import { ListChecks, CircleDollarSign, File } from "lucide-react";
 import PriceForm from "./_components/PriceForm";
 import AttachmentForm from "./_components/AttahmentForm";
+import ChapterForm from "./_components/ChapterForm";
 
 interface CourseIdPageInterface {
   params: {
@@ -25,8 +26,14 @@ const CourseIdPage = async ({ params }: CourseIdPageInterface) => {
   const course = await db.course.findUnique({
     where: {
       id: params.courseId,
+      userId: userId,
     },
     include: {
+      chapters: {
+        orderBy: {
+          position: "asc",
+        },
+      },
       attachments: {
         orderBy: {
           createdAt: "desc",
@@ -35,22 +42,22 @@ const CourseIdPage = async ({ params }: CourseIdPageInterface) => {
     },
   });
 
+  if (!course) {
+    return redirect("/");
+  }
+
   const categories = await db.category.findMany({
     orderBy: {
       name: "asc",
     },
   });
 
-  if (!course) {
-    return redirect("/");
-  }
-
   const requiredFields = [
     course.title,
     course.description,
     course.imageUrl,
     course.price,
-    course.categoryId,
+    course.chapters.some((chapter) => chapter.isPublished),
   ];
 
   const totalFields = requiredFields.length;
@@ -83,14 +90,15 @@ const CourseIdPage = async ({ params }: CourseIdPageInterface) => {
           ></DescriptionForm>
           <ImageForm initialData={course} courseId={course.id}></ImageForm>
         </div>
-        <div className="space-y-6">
-          <div>
-            <div className="flex items-center gap-x-2">
-              <ListChecks />
-              <h2 className="text-xl">Course chapters</h2>
-            </div>
-            <div>Todo: Chapters</div>
+
+        <div>
+          <div className="flex items-center gap-x-2">
+            <ListChecks />
+            <h2 className="text-xl">Course chapters</h2>
           </div>
+          <ChapterForm initialData={course} courseId={course.id}></ChapterForm>
+        </div>
+        <div>
           <div className="flex items-center gap-x-2">
             <CircleDollarSign />
             <h2 className="text-xl">Sell Your Course</h2>
@@ -98,16 +106,16 @@ const CourseIdPage = async ({ params }: CourseIdPageInterface) => {
           <div>
             <PriceForm initialData={course} courseId={course.id} />
           </div>
-          <div>
-            <div className="flex items-center gap-x-2">
-              <File />
-              <h2 className="text-xl">Resources</h2>
-            </div>
-            <AttachmentForm
-              initialData={course}
-              courseId={course.id}
-            ></AttachmentForm>
+        </div>
+        <div>
+          <div className="flex items-center gap-x-2">
+            <File />
+            <h2 className="text-xl">Resources</h2>
           </div>
+          <AttachmentForm
+            initialData={course}
+            courseId={course.id}
+          ></AttachmentForm>
         </div>
       </div>
     </div>
