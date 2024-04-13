@@ -1,3 +1,5 @@
+import ToBeFinished from "@/components/ToBeFinished";
+
 export default function page() {
-  return <div>analytics page</div>;
+  return <ToBeFinished />;
 }

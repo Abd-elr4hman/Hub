@@ -10,6 +10,14 @@ import { ListChecks, CircleDollarSign, File } from "lucide-react";
 import PriceForm from "./_components/PriceForm";
 import AttachmentForm from "./_components/AttahmentForm";
 import ChapterForm from "./_components/ChapterForm";
+import { boolean } from "zod";
+import Banner from "@/components/banner";
+import Actions from "./_components/Actions";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+
+import { revalidatePath } from "next/cache";
+import Back from "./_components/Back";
 
 interface CourseIdPageInterface {
   params: {
@@ -19,6 +27,7 @@ interface CourseIdPageInterface {
 
 const CourseIdPage = async ({ params }: CourseIdPageInterface) => {
   const { userId } = auth();
+
   if (!userId) {
     return redirect("/");
   }
@@ -65,60 +74,85 @@ const CourseIdPage = async ({ params }: CourseIdPageInterface) => {
 
   const completionText = `(${completedFields} / ${totalFields})`;
 
-  return (
-    <div className="p-6 ">
-      <div className="flex items-center justify-between">
-        <div className="flex flex-col gap-y-2">
-          <h1 className="text-2xl font-medium">
-            Complete Creating Your Course!
-          </h1>
-          <span className="text-sm text-slate-700">
-            Complete all fields {completionText}
-          </span>
-        </div>
-      </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6  mt-6 ">
-        <div className="">
-          <div className="flex items-center gap-x-2">
-            <LayoutDashboard></LayoutDashboard>
-            <h2 className="text-xl">Customize your course</h2>
-          </div>
-          <TitleForm initialData={course} courseId={course.id}></TitleForm>
-          <DescriptionForm
-            initialData={course}
-            courseId={course.id}
-          ></DescriptionForm>
-          <ImageForm initialData={course} courseId={course.id}></ImageForm>
-        </div>
+  const isComplete = requiredFields.every(Boolean);
 
-        <div>
-          <div className="flex items-center gap-x-2">
-            <ListChecks />
-            <h2 className="text-xl">Course chapters</h2>
+  return (
+    <>
+      {!course.isPublished && (
+        <Banner label="This course is unpublished, it will not be visible."></Banner>
+      )}
+      <div className="p-6 ">
+        {/* <div>
+          <Link
+            href={`/teacher/courses/`}
+            className="flex items-center text-sm hover:opacity-75 transition mb-6"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Courses
+          </Link>
+        </div> */}
+        <Back link="/teacher/courses" text="Back to Course" />
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-y-2">
+            <h1 className="text-2xl font-medium">
+              Complete Creating Your Course!
+            </h1>
+            <span className="text-sm text-slate-700">
+              Complete all fields {completionText}
+            </span>
           </div>
-          <ChapterForm initialData={course} courseId={course.id}></ChapterForm>
+          <Actions
+            disabled={!isComplete}
+            courseId={params.courseId}
+            isPublished={course.isPublished}
+          ></Actions>
         </div>
-        <div>
-          <div className="flex items-center gap-x-2">
-            <CircleDollarSign />
-            <h2 className="text-xl">Sell Your Course</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6  mt-6 ">
+          <div className="">
+            <div className="flex items-center gap-x-2">
+              <LayoutDashboard></LayoutDashboard>
+              <h2 className="text-xl">Customize your course</h2>
+            </div>
+            <TitleForm initialData={course} courseId={course.id}></TitleForm>
+            <DescriptionForm
+              initialData={course}
+              courseId={course.id}
+            ></DescriptionForm>
+            <ImageForm initialData={course} courseId={course.id}></ImageForm>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-x-2">
+              <ListChecks />
+              <h2 className="text-xl">Course chapters</h2>
+            </div>
+            <ChapterForm
+              initialData={course}
+              courseId={course.id}
+            ></ChapterForm>
           </div>
           <div>
-            <PriceForm initialData={course} courseId={course.id} />
+            <div className="flex items-center gap-x-2">
+              <CircleDollarSign />
+              <h2 className="text-xl">Sell Your Course</h2>
+            </div>
+            <div>
+              <PriceForm initialData={course} courseId={course.id} />
+            </div>
           </div>
-        </div>
-        <div>
-          <div className="flex items-center gap-x-2">
-            <File />
-            <h2 className="text-xl">Resources</h2>
+          <div>
+            <div className="flex items-center gap-x-2">
+              <File />
+              <h2 className="text-xl">Resources</h2>
+            </div>
+            <AttachmentForm
+              initialData={course}
+              courseId={course.id}
+            ></AttachmentForm>
           </div>
-          <AttachmentForm
-            initialData={course}
-            courseId={course.id}
-          ></AttachmentForm>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

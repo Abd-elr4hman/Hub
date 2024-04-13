@@ -1,5 +1,5 @@
 import { UserButton } from "@clerk/nextjs";
-
+import ToBeFinished from "@/components/ToBeFinished";
 export default function Home() {
-  return <div>this is dashboard</div>;
+  return <ToBeFinished />;
 }
