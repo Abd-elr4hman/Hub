@@ -1,10 +1,11 @@
+import { cn } from "@/lib/utils";
 import Logo from "./Logo";
 import SidebarRoutes from "./SidebarRoutes";
 import { UserButton } from "@clerk/nextjs";
 
 const Sidebar = () => {
   return (
-    <div className="h-full overflow-y-auto bg-slate-100 shadow-sm flex flex-col justify-between">
+    <div className="h-full overflow-y-auto bg-slate-200 md:rounded-3xl md:my-2 md:ml-2 shadow-sm flex flex-col justify-between">
       <div className="flex flex-col ">
         <div className="flex justify-center p-6 ">
           <Logo></Logo>
@@ -16,13 +17,23 @@ const Sidebar = () => {
       </div>
 
       <div className="flex justify-center p-6">
-        <UserButton
-          showName={true}
-          appearance={{
-            variables: {},
-          }}
-          afterSignOutUrl="/"
-        ></UserButton>
+        <div className="md:hidden lg:block">
+          <UserButton
+            showName={true}
+            appearance={{
+              variables: {},
+            }}
+            afterSignOutUrl="/"
+          ></UserButton>
+        </div>
+        <div className="md:block lg:hidden">
+          <UserButton
+            appearance={{
+              variables: {},
+            }}
+            afterSignOutUrl="/"
+          ></UserButton>
+        </div>
       </div>
     </div>
   );

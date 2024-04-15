@@ -32,7 +32,7 @@ const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {
     >
       <div className="flex items-center gap-x-2 py-4">
         <Icon></Icon>
-        <p>{label}</p>
+        <p className="md:hidden lg:block">{label}</p>
       </div>
     </Button>
   );
