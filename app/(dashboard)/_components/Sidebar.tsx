@@ -4,7 +4,7 @@ import { UserButton } from "@clerk/nextjs";
 
 const Sidebar = () => {
   return (
-    <div className="h-full border-r overflow-y-auto bg-white shadow-sm flex flex-col justify-between">
+    <div className="h-full overflow-y-auto bg-slate-100 shadow-sm flex flex-col justify-between">
       <div className="flex flex-col ">
         <div className="flex justify-center p-6 ">
           <Logo></Logo>
