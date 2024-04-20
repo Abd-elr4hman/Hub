@@ -94,7 +94,7 @@ const VideoForm = ({ initialData, courseId, chapterId }: VideoFormProps) => {
             }}
           />
           <div className="text-xs text-muted-foreground mt-4">
-            Upload this chapter's video
+            {"Upload this chapter's video"}
           </div>
         </div>
       )}

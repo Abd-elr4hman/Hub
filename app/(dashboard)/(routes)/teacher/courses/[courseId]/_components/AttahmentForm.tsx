@@ -89,7 +89,7 @@ const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) => {
         <>
           {initialData.attachments.length === 0 && (
             <p className="text-sm mt-2 text-slate-500 italic">
-              You didn't add any attachments
+              {"You didn't add any attachments"}
             </p>
           )}
           {initialData.attachments.length > 0 && (
