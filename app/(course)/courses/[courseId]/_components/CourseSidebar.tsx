@@ -3,6 +3,8 @@ import { Chapter, Course, UserProgress } from "@prisma/client";
 import { redirect } from "next/navigation";
 import CourseSidebarItem from "./CourseSidebarItem";
 import { UserButton } from "@clerk/nextjs";
+import CourseProgress from "@/components/CourseProgress";
+import Image from "next/image";
 
 interface CourseSidebarProps {
   course: Course & {
@@ -20,11 +22,13 @@ const CourseSidebar = ({ course, progressCount }: CourseSidebarProps) => {
   }
 
   return (
-    <div className="h-full  bg-slate-200  rounded-3xl my-1 ml-1 flex flex-col justify-between overflow-y-auto shadow-sm">
+    <div className=" h-full rounded-3xl my-1 ml-1 flex flex-col justify-between overflow-y-auto shadow-sm">
       <div>
-        <div className="p-4 flex flex-col border-b border-slate-300">
+        <div className="p-4 flex flex-col">
           <h1 className="text-md font-semibold">{course.title}</h1>
-          <p>progress goes here</p>
+          <div className="">
+            <CourseProgress variant="success" value={progressCount} />
+          </div>
         </div>
 
         <div className="flex flex-col w-full">
@@ -41,7 +45,7 @@ const CourseSidebar = ({ course, progressCount }: CourseSidebarProps) => {
         </div>
       </div>
 
-      <div className="flex justify-center p-6">
+      <div className="fixed  bottom-0 left-0 p-6">
         <UserButton
           showName={true}
           appearance={{

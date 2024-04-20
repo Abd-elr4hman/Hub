@@ -6,6 +6,7 @@ import { LogOut } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import SearchInput from "./SearchInput";
+import Image from "next/image";
 
 const NavebarRoutes = () => {
   const pathname = usePathname();
@@ -20,12 +21,15 @@ const NavebarRoutes = () => {
 
   return (
     <>
+      <div className="ml-6 ">
+        <Image height={90} width={90} alt="logo" src="/lmslogo.png"></Image>
+      </div>
       {isSearchPage && (
-        <div className="hidden md:block  w-full">
+        <div className="hidden md:block w-96">
           <SearchInput />
         </div>
       )}
-      <div className="flex gap-x-2 ml-auto ">
+      <div className="flex gap-x-2">
         {isTeacherPage || isCoursePage ? (
           <Link href="/dashboard">
             <Button size="sm" variant="ghost">

@@ -81,7 +81,7 @@ const CourseIdPage = async ({ params }: CourseIdPageInterface) => {
       {!course.isPublished && (
         <Banner label="This course is unpublished, it will not be visible."></Banner>
       )}
-      <div className="p-6 ">
+      <div className="p-6">
         {/* <div>
           <Link
             href={`/teacher/courses/`}

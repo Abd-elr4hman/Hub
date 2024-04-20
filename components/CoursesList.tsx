@@ -1,8 +1,11 @@
 import { Course } from "@prisma/client";
 import CourseCard from "./CourseCard";
+import { db } from "@/lib/db";
+import { auth } from "@clerk/nextjs";
 
 type CourseWithProgress = Course & {
   chapters: { id: string }[];
+  // progress: number | null;
   progress: number | null;
 };
 
@@ -22,7 +25,8 @@ const CoursesList = ({ items }: CoursesListProps) => {
             imageUrl={item.imageUrl!}
             chaptersLength={item.chapters.length}
             price={item.price!}
-            progress={item.progress}
+            // progress={item.progress}
+            progress={item.progress!}
           />
         ))}
       </div>

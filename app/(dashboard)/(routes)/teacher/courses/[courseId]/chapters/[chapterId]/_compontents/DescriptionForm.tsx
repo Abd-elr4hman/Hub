@@ -26,6 +26,8 @@ import { PencilIcon } from "lucide-react";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Chapter, Course } from "@prisma/client";
+import Editor from "@/components/Editor";
+import Preview from "@/components/Preview";
 
 interface DescriptionFormProps {
   initialData: Chapter;
@@ -35,9 +37,7 @@ interface DescriptionFormProps {
 
 // define form shcema with zod
 const formSchema = z.object({
-  description: z.string().min(1, {
-    message: "Description is required",
-  }),
+  description: z.string().min(1),
 });
 
 const DescriptionForm = ({
@@ -95,14 +95,17 @@ const DescriptionForm = ({
         </Button>
       </div>
       {!isEditing ? (
-        <p
+        <div
           className={cn(
             "text-sm mt-2",
             !initialData.description && "text-slate-500 italic"
           )}
         >
-          {initialData.description || "No descriptions"}
-        </p>
+          {!initialData.description && "No descriptions"}
+          {initialData.description && (
+            <Preview value={initialData.description} />
+          )}
+        </div>
       ) : (
         <Form {...form}>
           <form
@@ -115,11 +118,7 @@ const DescriptionForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Textarea
-                      disabled={isSubmitting}
-                      placeholder="e.g. chapter is about..."
-                      {...field}
-                    />
+                    <Editor {...field} />
                   </FormControl>
                 </FormItem>
               )}

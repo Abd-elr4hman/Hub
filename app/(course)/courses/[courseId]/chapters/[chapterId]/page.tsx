@@ -3,6 +3,9 @@ import Banner from "@/components/banner";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import VideoPlayer from "./_components/VideoPlayer";
+import CourseProgress from "@/components/CourseProgress";
+import CourseProgressButton from "./_components/CourseProgressButton";
+import Preview from "@/components/Preview";
 
 const ChapterIdPage = async ({
   params,
@@ -45,6 +48,20 @@ const ChapterIdPage = async ({
             isLocked={isLocked}
             completeOnEnd={completeOnEnd!}
           />
+        </div>
+        <div className="bg-slate-200 rounded-xl mx-6">
+          <div className="pt-2 px-4 flex flex-col lg:flex-row items-center justify-between">
+            <h2 className="text-2xl font-semibold mb-2">{chapter.title}</h2>
+            <CourseProgressButton
+              chapterId={params.chapterId}
+              courseId={params.courseId}
+              nextChapterId={nextChapter?.id}
+              isCompeted={!!userProgress?.isCompeted}
+            />
+          </div>
+          <div className="pb-2 px-4">
+            <Preview value={chapter.description!} />
+          </div>
         </div>
       </div>
     </div>

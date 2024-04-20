@@ -9,9 +9,15 @@ interface SidebarItemProps {
   icon: LucideIcon;
   label: string;
   href: string;
+  labelStyle: string;
 }
 
-const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {
+const SidebarItem = ({
+  icon: Icon,
+  label,
+  href,
+  labelStyle,
+}: SidebarItemProps) => {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -32,7 +38,7 @@ const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {
     >
       <div className="flex items-center gap-x-2 py-4">
         <Icon></Icon>
-        <p className="md:hidden lg:block">{label}</p>
+        <p className={labelStyle}>{label}</p>
       </div>
     </Button>
   );

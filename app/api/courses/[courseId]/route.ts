@@ -73,10 +73,13 @@ export async function DELETE(
     // check mux data of every chapter and if any chapter have mux data, delete it
     for (const chapter of course.chapters) {
       if (chapter.muxData?.assetId) {
-        await mux.video.assets.delete(chapter.muxData.assetId);
+        try {
+          await mux.video.assets.delete(chapter.muxData.assetId);
+        } catch (error) {
+          console.log("[COURSE_ID_DELETE]", error);
+        }
       }
     }
-    console.log("here");
     // now delete the course in the db
     const deletedCourse = await db.course.delete({
       where: {

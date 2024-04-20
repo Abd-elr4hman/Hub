@@ -23,27 +23,33 @@ const teacherRoutes = [
     label: "Courses",
     href: "/teacher/courses",
   },
-  {
-    icon: BarChart,
-    label: "Analytics",
-    href: "/teacher/analytics",
-  },
+  // {
+  //   icon: BarChart,
+  //   label: "Analytics",
+  //   href: "/teacher/analytics",
+  // },
 ];
 
-const SidebarRoutes = () => {
+interface SidebarRoutesProps {
+  routeNameStyle: string;
+  mobile: boolean;
+}
+
+const SidebarRoutes = ({ routeNameStyle, mobile }: SidebarRoutesProps) => {
   const pathname = usePathname();
   const isTeacherPage = pathname?.includes("/teacher");
 
   const routes = isTeacherPage ? teacherRoutes : guestRoutes;
 
   return (
-    <div className="flex flex-col md:items-center lg:items-stretch w-full">
+    <div className={`flex flex-col w-full ${routeNameStyle}`}>
       {routes.map((route) => (
         <SidebarItem
           key={route.href}
           icon={route.icon}
           label={route.label}
           href={route.href}
+          labelStyle={mobile ? "block" : "md:hidden lg:block"}
         />
       ))}
     </div>

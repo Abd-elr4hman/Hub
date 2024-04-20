@@ -11,8 +11,10 @@ async function getProgress(userId: string, courseId: string) {
         id: true,
       },
     });
+    // console.log("published chapter", publishedChapters);
 
     const publishedChapterIds = publishedChapters.map((chapter) => chapter.id);
+    // console.log("publishedChapterIds", publishedChapterIds);
     const validCompletedChapter = await db.userProgress.count({
       where: {
         userId: userId,
@@ -22,9 +24,12 @@ async function getProgress(userId: string, courseId: string) {
         isCompeted: true,
       },
     });
+    // console.log("validCompletedChapter", validCompletedChapter);
 
     const progressPercentage =
       (validCompletedChapter / publishedChapterIds.length) * 100;
+
+    // console.log("progressPercentage", progressPercentage);
     return progressPercentage;
   } catch (error) {
     console.log("[GET_PROGRESS]", error);
