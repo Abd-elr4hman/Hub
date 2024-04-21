@@ -22,7 +22,7 @@ const CourseSidebar = ({ course, progressCount }: CourseSidebarProps) => {
   }
 
   return (
-    <div className=" h-full rounded-3xl my-1 ml-1 flex flex-col justify-between overflow-y-auto shadow-sm">
+    <div className="h-full rounded-3xl my-1 ml-1 flex flex-col justify-between overflow-y-auto shadow-sm">
       <div>
         <div className="p-4 flex flex-col">
           <h1 className="text-md font-semibold">{course.title}</h1>

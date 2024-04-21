@@ -37,7 +37,7 @@ const ChapterIdPage = async ({
       )}
       {isLocked && <Banner variant="warning" label="This part is locked" />}
 
-      <div className="flex flex-col max-w-4xl mx-auto pb-20">
+      <div className="flex flex-col max-w-screen-xl mx-auto pb-20">
         <div className="p-4">
           <VideoPlayer
             chapterId={params.chapterId}
