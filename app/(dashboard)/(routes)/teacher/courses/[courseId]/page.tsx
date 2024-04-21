@@ -18,6 +18,7 @@ import { ArrowLeft } from "lucide-react";
 
 import { revalidatePath } from "next/cache";
 import Back from "./_components/Back";
+import CategoryForm from "./_components/CategoryForm";
 
 interface CourseIdPageInterface {
   params: {
@@ -119,6 +120,14 @@ const CourseIdPage = async ({ params }: CourseIdPageInterface) => {
               courseId={course.id}
             ></DescriptionForm>
             <ImageForm initialData={course} courseId={course.id}></ImageForm>
+            <CategoryForm
+              initialData={course}
+              courseId={course.id}
+              options={categories.map((category) => ({
+                label: category.name,
+                value: category.id,
+              }))}
+            />
           </div>
 
           <div>

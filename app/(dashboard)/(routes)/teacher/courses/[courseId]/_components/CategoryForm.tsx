@@ -26,7 +26,7 @@ import { PencilIcon } from "lucide-react";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Course } from "@prisma/client";
-import { ComboboxPopover } from "@/components/ui/combobox";
+import { Combobox } from "@/components/ui/combobox";
 
 interface CategoryFormProps {
   initialData: Course;
@@ -118,7 +118,7 @@ const CategoryForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <ComboboxPopover options={options} {...field} />
+                    <Combobox options={options} {...field} />
                   </FormControl>
                 </FormItem>
               )}

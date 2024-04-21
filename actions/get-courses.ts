@@ -3,7 +3,8 @@ import { Category, Course } from "@prisma/client";
 import getProgress from "./get-progress";
 import { db } from "@/lib/db";
 
-type CourseWithProgress = Course & {
+type CourseWithProgressWithCategory = Course & {
+  category: Category | null;
   chapters: { id: string }[];
   progress: number | null;
 };
@@ -11,12 +12,14 @@ type CourseWithProgress = Course & {
 type GetCourses = {
   userId: string;
   title?: string;
+  categoryId?: string;
 };
 
 export const GetCourses = async ({
   userId,
   title,
-}: GetCourses): Promise<CourseWithProgress[]> => {
+  categoryId,
+}: GetCourses): Promise<CourseWithProgressWithCategory[]> => {
   try {
     const courses = await db.course.findMany({
       where: {
@@ -24,8 +27,10 @@ export const GetCourses = async ({
         title: {
           contains: title,
         },
+        categoryId,
       },
       include: {
+        category: true,
         chapters: {
           where: {
             isPublished: true,
@@ -40,18 +45,19 @@ export const GetCourses = async ({
       },
     });
 
-    const coursesWithProgress: CourseWithProgress[] = await Promise.all(
-      courses.map(async (course) => {
-        const progressPercentag = await getProgress(userId, course.id);
+    const coursesWithProgressWithcategory: CourseWithProgressWithCategory[] =
+      await Promise.all(
+        courses.map(async (course) => {
+          const progressPercentag = await getProgress(userId, course.id);
 
-        return {
-          ...course,
-          progress: progressPercentag,
-        };
-      })
-    );
+          return {
+            ...course,
+            progress: progressPercentag,
+          };
+        })
+      );
 
-    return coursesWithProgress;
+    return coursesWithProgressWithcategory;
   } catch (error) {
     console.log("[GET_COURSES]", error);
     return [];
