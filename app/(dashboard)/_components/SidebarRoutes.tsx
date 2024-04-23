@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart, Compass, Layout, List } from "lucide-react";
+import { BarChart, Compass, Layout, List, Newspaper } from "lucide-react";
 import SidebarItem from "./SidebarItem";
 import { useParams, usePathname } from "next/navigation";
 
@@ -14,6 +14,11 @@ const guestRoutes = [
     icon: Compass,
     label: "Browse",
     href: "/search",
+  },
+  {
+    icon: Newspaper,
+    label: "Articles",
+    href: "/articles",
   },
 ];
 
