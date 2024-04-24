@@ -12,6 +12,7 @@ const ArticleList = ({ items }: ArticleListProps) => {
       {items.map((item) => (
         <ArticleCard
           key={item.id}
+          id={item.id}
           title={item.title}
           body={item.body!}
           imageUrl={item.imageUrl!}
