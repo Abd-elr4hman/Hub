@@ -119,3 +119,15 @@ model Enroll {
 
   @@index([courseId])
 }
+
+model Article {
+  id String @id @default(uuid())
+  userId String
+  title String @db.Text
+  body String? @db.Text
+  imageUrl String? @db.Text
+  isPublished Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

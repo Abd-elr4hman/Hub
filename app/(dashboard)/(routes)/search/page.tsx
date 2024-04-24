@@ -5,11 +5,13 @@ import { redirect } from "next/navigation";
 import CoursesList from "@/components/CoursesList";
 import { db } from "@/lib/db";
 import Categories from "./_components/Categories";
+import PageInput from "@/components/PageInput";
 
 interface SearchPageProps {
   searchParams: {
     title: string;
-    categoryId: string;
+    categoryId?: string;
+    page: number;
   };
 }
 
@@ -25,19 +27,24 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
     },
   });
 
-  const courses = await GetCourses({
+  const { coursesWithProgressWithCategory, coursesCount } = await GetCourses({
     userId,
     ...searchParams,
   });
 
+  const maxPage = Math.ceil(coursesCount / 10);
+
   return (
     <>
       <div className="px-6 pt-6 md:hidden md:mb-0 block">
-        <SearchInput />
+        <SearchInput placeholder="Search Courses" />
       </div>
       <div className="p-6 space-y-4">
         <Categories items={categories} />
-        <CoursesList items={courses} />
+        <CoursesList items={coursesWithProgressWithCategory} />
+      </div>
+      <div>
+        <PageInput maxPage={maxPage} />
       </div>
     </>
   );

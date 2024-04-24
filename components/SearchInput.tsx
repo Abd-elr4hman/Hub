@@ -7,7 +7,11 @@ import useDebounce from "@/hooks/use-debounce";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
 
-const SearchInput = () => {
+interface SearchInputProps {
+  placeholder: string;
+}
+
+const SearchInput = ({ placeholder }: SearchInputProps) => {
   const [value, setValue] = useState("");
   const debouncedValue = useDebounce(value);
 
@@ -35,7 +39,7 @@ const SearchInput = () => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         className="w-full pl-9 rounded-full bg-slate-100 focus-visible:ring-slate-200"
-        placeholder="Search Courses"
+        placeholder={placeholder}
       />
     </div>
   );
