@@ -13,7 +13,7 @@ const NavebarRoutes = () => {
   const router = useRouter();
 
   const isCoursePage = pathname?.startsWith("/courses");
-  const isArticlePage = pathname?.startsWith("/articles");
+  const isArticlePage = pathname === "/articles";
   const isTeacherPage = pathname?.startsWith("/teacher");
   const isSearchPage = pathname === "/search";
 
@@ -27,12 +27,12 @@ const NavebarRoutes = () => {
       </div>
       {isSearchPage && (
         <div className="hidden md:block w-96">
-          <SearchInput placeholder="Search Coures"/>
+          <SearchInput placeholder="Search Coures" />
         </div>
       )}
       {isArticlePage && (
         <div className="hidden md:block w-96">
-          <SearchInput placeholder="Search Articles"/>
+          <SearchInput placeholder="Search Articles" />
         </div>
       )}
       <div className="flex gap-x-2">

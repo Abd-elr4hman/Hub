@@ -8,10 +8,10 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
 
 interface SearchInputProps {
-  placeholder: string
+  placeholder: string;
 }
 
-const SearchInput = ({placeholder}: SearchInputProps) => {
+const SearchInput = ({ placeholder }: SearchInputProps) => {
   const [value, setValue] = useState("");
   const debouncedValue = useDebounce(value);
 

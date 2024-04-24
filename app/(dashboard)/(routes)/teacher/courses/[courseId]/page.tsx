@@ -10,13 +10,9 @@ import { ListChecks, CircleDollarSign, File } from "lucide-react";
 import PriceForm from "./_components/PriceForm";
 import AttachmentForm from "./_components/AttahmentForm";
 import ChapterForm from "./_components/ChapterForm";
-import { boolean } from "zod";
 import Banner from "@/components/banner";
 import Actions from "./_components/Actions";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 
-import { revalidatePath } from "next/cache";
 import Back from "./_components/Back";
 import CategoryForm from "./_components/CategoryForm";
 
