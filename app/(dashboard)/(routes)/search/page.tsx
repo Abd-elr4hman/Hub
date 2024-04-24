@@ -35,18 +35,18 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
   const maxPage = Math.ceil(coursesCount / 10);
 
   return (
-    <>
+    <div className="h-full mb-12  ">
       <div className="px-6 pt-6 md:hidden md:mb-0 block">
         <SearchInput placeholder="Search Courses" />
       </div>
-      <div className="p-6 space-y-4">
+      <div className="p-6 space-y-4 ">
         <Categories items={categories} />
         <CoursesList items={coursesWithProgressWithCategory} />
       </div>
-      <div>
+      <div className="">
         <PageInput maxPage={maxPage} />
       </div>
-    </>
+    </div>
   );
 };
 
