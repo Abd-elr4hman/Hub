@@ -45,15 +45,15 @@ const ArticlesPage = async ({ searchParams }: ArticlePageProps) => {
   });
   const maxPage = Math.ceil(articleCount / pageSize);
   return (
-    <div className="h-full static ">
-      <div className="absolute bottom-12 right-12">
-        <PageInput maxPage={maxPage} />
-      </div>
+    <div className="h-full  ">
       <div className="px-6 pt-6 md:hidden md:mb-0 block">
         <SearchInput placeholder="Search Articles" />
       </div>
       <div className="p-6">
         <ArticleList items={articles} />
+      </div>
+      <div className="">
+        <PageInput maxPage={maxPage} />
       </div>
     </div>
   );
