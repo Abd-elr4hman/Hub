@@ -15,7 +15,7 @@ const DashboardLayout = ({ children }: DashboardLayoutInterface) => {
       <div className="hidden md:flex mt-[80px]  h-full md:w-20 lg:w-60 flex-col fixed inset-y-0 z-50">
         <Sidebar />
       </div>
-      <main className="md:pl-20 lg:pl-56 h-full pt-[80px]">{children}</main>
+      <main className="md:pl-20 lg:pl-60 h-full pt-[80px]">{children}</main>
     </div>
   );
 };

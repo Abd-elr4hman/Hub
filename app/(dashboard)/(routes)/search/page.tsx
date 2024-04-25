@@ -34,8 +34,6 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
     pageSize,
   });
 
-  const maxPage = Math.max(Math.ceil(coursesCount / 8), 1);
-
   return (
     <div className="h-full flex flex-col mb-12 ">
       <div className="px-6 pt-6 md:hidden md:mb-0 block">
@@ -46,7 +44,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
         <CoursesList items={coursesWithProgressWithCategory} />
       </div>
       <div className="mt-auto">
-        <PageInput maxPage={maxPage} />
+        <PageInput itemCount={coursesCount} />
       </div>
     </div>
   );
