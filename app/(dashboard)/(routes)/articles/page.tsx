@@ -43,7 +43,8 @@ const ArticlesPage = async ({ searchParams }: ArticlePageProps) => {
       },
     },
   });
-  const maxPage = Math.ceil(articleCount / pageSize);
+  const maxPage = Math.max(Math.ceil(articleCount / pageSize), 1);
+
   return (
     <div className="h-full  ">
       <div className="px-6 pt-6 md:hidden md:mb-0 block">
