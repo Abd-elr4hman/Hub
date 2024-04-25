@@ -27,24 +27,28 @@ const PageInput = ({ maxPage }: PageInputProps) => {
     router.push(url);
   }, [value, router, pathname]);
   return (
-    <div className="flex items-center justify-center gap-2">
-      <Button
-        disabled={value === 1}
-        className="py-2"
-        type="button"
-        onClick={(e) => setValue(value - 1)}
-      >
-        Back{" "}
-      </Button>
-      <Button
-        disabled={maxPage === value}
-        className="py-2"
-        type="button"
-        onClick={(e) => setValue(value + 1)}
-      >
-        Next{" "}
-      </Button>
-    </div>
+    <>
+      {value === 1 || maxPage === value ? null : (
+        <div className="flex items-center justify-center gap-2">
+          <Button
+            disabled={value === 1}
+            className="py-2"
+            type="button"
+            onClick={(e) => setValue(value - 1)}
+          >
+            Back{" "}
+          </Button>
+          <Button
+            disabled={maxPage === value}
+            className="py-2"
+            type="button"
+            onClick={(e) => setValue(value + 1)}
+          >
+            Next{" "}
+          </Button>
+        </div>
+      )}
+    </>
   );
 };
 

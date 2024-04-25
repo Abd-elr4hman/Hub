@@ -19,6 +19,7 @@ type GetCourses = {
   title?: string;
   categoryId?: string;
   page: number;
+  pageSize: number;
 };
 
 export const GetCourses = async ({
@@ -26,9 +27,9 @@ export const GetCourses = async ({
   title,
   categoryId,
   page,
+  pageSize,
 }: GetCourses): Promise<CoursesWithProgressWithCategoryWithCount> => {
   try {
-    const pageSize = 8;
     const skipCount = page && page > 0 ? (page - 1) * pageSize : 0;
 
     const courses = await db.course.findMany({
