@@ -8,7 +8,8 @@ import PageInput from "@/components/PageInput";
 interface ArticlePageProps {
   searchParams: {
     title: string;
-    page: number;
+    page?: number;
+    pageSize?: number;
   };
 }
 
@@ -18,15 +19,16 @@ const ArticlesPage = async ({ searchParams }: ArticlePageProps) => {
     return redirect("/");
   }
 
-  const pageSize = 8;
-  const skipCount =
-    searchParams.page && searchParams.page > 0
-      ? (searchParams.page - 1) * pageSize
-      : 0;
+  const page = Number(searchParams["page"]);
+  const pageSize = Number(searchParams["pageSize"]);
+
+  // const pageSize = 8;
+  const skipCount = page ? (page - 1) * pageSize : 0;
+  const take = pageSize ? pageSize : 8;
 
   const articles = await db.article.findMany({
     skip: skipCount,
-    take: pageSize,
+    take: take,
     where: {
       isPublished: true,
       title: {
@@ -43,7 +45,6 @@ const ArticlesPage = async ({ searchParams }: ArticlePageProps) => {
       },
     },
   });
-  const maxPage = Math.max(Math.ceil(articleCount / pageSize), 1);
 
   return (
     <div className="h-full  ">
@@ -54,7 +55,7 @@ const ArticlesPage = async ({ searchParams }: ArticlePageProps) => {
         <ArticleList items={articles} />
       </div>
       <div className="">
-        <PageInput maxPage={maxPage} />
+        <PageInput itemCount={articleCount} />
       </div>
     </div>
   );

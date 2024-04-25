@@ -23,16 +23,20 @@ const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
   }
 
   return (
-    <div className="flex flex-col max-w-3xl mx-auto">
-      <Back link="/articles" text="Back to Articles" />
-      <div className="relative aspect-video">
-        <Image fill src={article?.imageUrl!} alt={article?.title!} />
-      </div>
-      <div className="flex justify-center p-4">
-        <h2 className="font-bold text-4xl">{article.title}</h2>
-      </div>
-      <div className="flex justify-center">
-        <Preview value={article.body!} />
+    <div className="">
+      <div className="flex flex-col max-w-6xl mx-auto ">
+        <div className="mx-auto fixed top-30 left-30 z-40 px-2 pt-4 w-full bg-white">
+          <Back link="/articles" text="Back to Articles" />
+        </div>
+        <div className="relative aspect-video mt-10">
+          <Image fill src={article?.imageUrl!} alt={article?.title!} />
+        </div>
+        <div className="flex justify-center p-4">
+          <h2 className="font-bold text-4xl">{article.title}</h2>
+        </div>
+        <div className="flex justify-center text-6xl">
+          <Preview value={article.body!} style="" />
+        </div>
       </div>
     </div>
   );
