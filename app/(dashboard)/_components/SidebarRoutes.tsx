@@ -1,21 +1,19 @@
 "use client";
 
 import {
-  BarChart,
-  Compass,
   Layout,
-  List,
   Newspaper,
   Presentation,
   NotebookPen,
+  GraduationCap,
 } from "lucide-react";
 import SidebarItem from "./SidebarItem";
 import { useParams, usePathname } from "next/navigation";
 
 const guestRoutes = [
   {
-    icon: Layout,
-    label: "Dashboard",
+    icon: GraduationCap,
+    label: "MyLearning",
     href: "/dashboard",
   },
   {

@@ -14,6 +14,7 @@ interface ArticleCardProps {
   body: string;
   imageUrl: string;
   createdAt: Date;
+  truncate?: number;
 }
 
 const ArticleCard = ({
@@ -23,6 +24,7 @@ const ArticleCard = ({
   body,
   imageUrl,
   createdAt,
+  truncate,
 }: ArticleCardProps) => {
   const dateString = createdAt.toLocaleString();
   return (
@@ -42,7 +44,11 @@ const ArticleCard = ({
               <h2 className="font-semibold">{title}</h2>
             </div>
             <div className="min-h-14">
-              <Preview style="text-gray-800/40" value={body} truncate={true} />
+              <Preview
+                style="text-gray-800/40"
+                value={body}
+                truncate={truncate}
+              />
             </div>
           </div>
           <div className="w-full mt-auto p-2 border-t border-black flex justify-between">

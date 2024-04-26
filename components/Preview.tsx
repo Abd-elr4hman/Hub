@@ -7,7 +7,7 @@ import "react-quill/dist/quill.bubble.css";
 interface PreviewProps {
   value: string;
   style?: string;
-  truncate?: boolean;
+  truncate?: number;
 }
 
 const truncateString = (str: string, num: number) => {
@@ -19,6 +19,7 @@ const truncateString = (str: string, num: number) => {
 };
 
 const Preview = ({ value, style, truncate }: PreviewProps) => {
+  console.log(truncate);
   const ReactQuill = useMemo(
     () => dynamic(() => import("react-quill"), { ssr: false }),
     []
@@ -28,7 +29,7 @@ const Preview = ({ value, style, truncate }: PreviewProps) => {
     <ReactQuill
       className={style ? style : ""}
       theme="bubble"
-      value={truncate ? truncateString(value, 100) : value}
+      value={truncate ? truncateString(value, truncate) : value}
       readOnly
     />
   );
