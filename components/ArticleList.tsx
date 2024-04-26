@@ -4,12 +4,20 @@ import { Article } from "@prisma/client";
 
 interface ArticleListProps {
   items: Article[];
+  gridStyle?: string;
+  truncate?: number;
 }
 
-const ArticleList = ({ items }: ArticleListProps) => {
+const ArticleList = ({ items, gridStyle, truncate }: ArticleListProps) => {
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 ">
+      <div
+        className={
+          gridStyle
+            ? gridStyle
+            : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 "
+        }
+      >
         {items.map((item) => (
           <ArticleCard
             key={item.id}
@@ -18,6 +26,7 @@ const ArticleList = ({ items }: ArticleListProps) => {
             body={item.body!}
             imageUrl={item.imageUrl!}
             createdAt={item.createdAt}
+            truncate={truncate ? truncate : 100}
           />
         ))}
       </div>

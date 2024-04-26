@@ -128,6 +128,23 @@ model Article {
   imageUrl String? @db.Text
   isPublished Boolean @default(false)
 
+  saves ArticleSave[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+
+model ArticleSave {
+  id String @id @default(uuid())
+  userId String
+
+  articleId String 
+  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([articleId])
+  @@unique([userId, articleId])
 }

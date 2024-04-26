@@ -4,6 +4,7 @@ import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import Back from "./_components/Back";
+import ArticleActions from "./_components/Actions";
 
 const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
   const { userId } = auth();
@@ -22,6 +23,15 @@ const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
     redirect("/articles");
   }
 
+  const articleSave = await db.articleSave.findUnique({
+    where: {
+      userId_articleId: {
+        userId,
+        articleId: article.id,
+      },
+    },
+  });
+
   return (
     <div className="">
       <div className="flex flex-col max-w-6xl mx-auto ">
@@ -31,7 +41,13 @@ const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
         <div className="relative aspect-video mt-10">
           <Image fill src={article?.imageUrl!} alt={article?.title!} />
         </div>
-        <div className="flex justify-center p-4">
+        <div>
+          <ArticleActions
+            articleId={article.id}
+            isSaved={articleSave ? true : false}
+          />
+        </div>
+        <div className="flex justify-center px-4">
           <h2 className="font-bold text-4xl">{article.title}</h2>
         </div>
         <div className="flex justify-center text-6xl">
