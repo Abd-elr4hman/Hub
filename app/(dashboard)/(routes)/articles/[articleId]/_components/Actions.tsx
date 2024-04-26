@@ -56,7 +56,7 @@ const ArticleActions = ({ articleId, isSaved }: ArticleActionsProps) => {
           type="button"
           onClick={unsaveArticle}
           variant="ghost"
-          className="hover:text-sky-800"
+          className=" hover:bg-red-200"
         >
           <BookmarkMinus size={20} />
         </Button>

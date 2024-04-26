@@ -23,7 +23,7 @@ const NavebarRoutes = () => {
   return (
     <>
       <div className="ml-6 ">
-        <Image height={90} width={90} alt="logo" src="/lmslogo.png"></Image>
+        <Image height={70} width={90} alt="logo" src="/bwhub.png"></Image>
       </div>
       {isSearchPage && (
         <div className="hidden md:block w-96">
