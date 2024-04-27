@@ -15,7 +15,7 @@ const Back = ({ link, text }: BackProps) => {
       <Link
         href={link}
         // onClick={() => router.refresh()}
-        className="flex items-center text-sm hover:opacity-75 transition mb-6"
+        className="flex items-center text-sm hover:opacity-75 transition "
       >
         <ArrowLeft className="h-4 w-4 mr-2" />
         {text}

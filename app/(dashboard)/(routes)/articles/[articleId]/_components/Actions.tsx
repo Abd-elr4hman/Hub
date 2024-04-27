@@ -24,10 +24,10 @@ const ArticleActions = ({ articleId, isSaved }: ArticleActionsProps) => {
     try {
       const response = await axios.post(`/api/articles/${articleId}/save`);
 
-      toast.success("Article Saved!");
+      // toast.success("Article Saved!");
       router.refresh();
     } catch (error) {
-      toast.error("Something went wrong!");
+      toast.error("Something went wrong! Cauld not save the article.");
     }
   };
 
@@ -35,21 +35,21 @@ const ArticleActions = ({ articleId, isSaved }: ArticleActionsProps) => {
     try {
       const response = await axios.delete(`/api/articles/${articleId}/unsave`);
 
-      toast.success("Article Unsaved!");
+      // toast.success("Article Unsaved!");
       router.refresh();
     } catch (error) {
-      toast.error("Something went wrong!");
+      toast.error("Something went wrong! Cauld not save the article.");
     }
   };
 
   return (
-    <div className="flex justify-center pt-2 ">
-      <Button variant="ghost" className="hover:text-red-300">
+    <div className="">
+      {/* <Button variant="ghost" className="hover:text-red-300">
         <Heart size={20} />
       </Button>
       <Button variant="ghost" className="hover:text-sky-800">
         <MessageSquareMore size={20} />
-      </Button>
+      </Button> */}
       {isSaved ? (
         <Button
           disabled={!isSaved}
@@ -66,7 +66,7 @@ const ArticleActions = ({ articleId, isSaved }: ArticleActionsProps) => {
           type="button"
           onClick={saveArticle}
           variant="ghost"
-          className="hover:text-sky-800"
+          className="hover:text-sky-800 hover:bg-sky-100"
         >
           <BookmarkPlus size={20} />
         </Button>
