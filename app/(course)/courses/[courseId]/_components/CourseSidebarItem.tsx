@@ -43,7 +43,7 @@ const CourseSidebarItem = ({
         isCompleted && isActive && "bg-emerald-200/20"
       )}
     >
-      <div className="flex items-center gap-x-2 py-4">
+      <div className="flex items-center  gap-x-2 py-4 ">
         <Icon
           size={22}
           className={cn(
@@ -51,7 +51,7 @@ const CourseSidebarItem = ({
             isActive && "text-slate-700",
             isCompleted && "text-emerald-700"
           )}
-        />{" "}
+        />
         {label}
       </div>
       <div

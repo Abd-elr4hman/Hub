@@ -31,13 +31,13 @@ const ChapterIdPage = async ({
   const completeOnEnd = userProgress?.isCompeted;
 
   return (
-    <div>
+    <div className=" ">
       {userProgress?.isCompeted && (
         <Banner variant="success" label="You already completed this chapter" />
       )}
       {isLocked && <Banner variant="warning" label="This part is locked" />}
 
-      <div className="flex flex-col max-w-screen-xl mx-auto pb-20">
+      <div className="flex flex-col pb-10 max-w-7xl mx-auto">
         <div className="p-4">
           <VideoPlayer
             chapterId={params.chapterId}

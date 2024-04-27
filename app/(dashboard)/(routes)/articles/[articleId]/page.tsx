@@ -34,19 +34,20 @@ const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
 
   return (
     <div className="">
-      <div className="flex flex-col max-w-6xl mx-auto ">
-        <div className="mx-auto fixed top-30 left-30 z-40 px-2 pt-4 w-full bg-white">
-          <Back link="/articles" text="Back to Articles" />
+      <div className="flex flex-col max-w-2xl mx-auto w-4/5">
+        <div className=" fixed top-30 left-30 z-40 w-[inherit] max-w-[inherit] bg-white">
+          <div className="flex  items-center justify-between">
+            <Back link="/articles" text="Back to Articles" />
+            <ArticleActions
+              articleId={article.id}
+              isSaved={articleSave ? true : false}
+            />
+          </div>
         </div>
         <div className="relative aspect-video mt-10">
           <Image fill src={article?.imageUrl!} alt={article?.title!} />
         </div>
-        <div>
-          <ArticleActions
-            articleId={article.id}
-            isSaved={articleSave ? true : false}
-          />
-        </div>
+
         <div className="flex justify-center px-4">
           <h2 className="font-bold text-4xl">{article.title}</h2>
         </div>
