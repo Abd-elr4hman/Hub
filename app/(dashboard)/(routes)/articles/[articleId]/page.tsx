@@ -5,6 +5,7 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import Back from "./_components/Back";
 import ArticleActions from "./_components/Actions";
+import ChatForm from "@/components/ChatForm";
 
 const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
   const { userId } = auth();
@@ -33,10 +34,10 @@ const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
   });
 
   return (
-    <div className="">
-      <div className="flex flex-col max-w-2xl mx-auto w-4/5">
+    <div className="flex justify-between ">
+      <div className="flex flex-col max-w-2xl mx-auto w-full ">
         <div className=" fixed top-30 left-30 z-40 w-[inherit] max-w-[inherit] bg-white">
-          <div className="flex  items-center justify-between">
+          <div className="flex items-center justify-between">
             <Back link="/articles" text="Back to Articles" />
             <ArticleActions
               articleId={article.id}
@@ -54,6 +55,9 @@ const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
         <div className="flex justify-center text-6xl">
           <Preview value={article.body!} style="" />
         </div>
+      </div>
+      <div className=" h-full hidden xl:block w-2/5 mt-10 mx-5 border shadow-lg rounded-lg">
+        <ChatForm />
       </div>
     </div>
   );
