@@ -33,7 +33,7 @@ const CourseMobileSidebar = ({
                 height={90}
                 width={90}
                 alt="logo"
-                src="/lmslogocut.png"
+                src="/bwhublogo.png"
               ></Image>
             </div>
             <div className="p-4 flex flex-col">
