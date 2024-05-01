@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import Back from "./_components/Back";
 import ArticleActions from "./_components/Actions";
 import ChatForm from "@/components/ChatForm";
+import Chat from "@/components/Chat";
 
 const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
   const { userId } = auth();
@@ -56,8 +57,9 @@ const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
           <Preview value={article.body!} style="" />
         </div>
       </div>
-      <div className=" h-full hidden xl:block w-2/5 mt-10 mx-5 border shadow-lg rounded-lg">
-        <ChatForm />
+      <div className="h-full hidden xl:block xl:relative w-2/5 mt-10 mx-5 ">
+        {/* <ChatForm article={article} /> */}
+        <Chat article={article} />
       </div>
     </div>
   );

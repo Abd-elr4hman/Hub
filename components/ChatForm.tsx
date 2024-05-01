@@ -19,9 +19,10 @@ import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { Article } from "@prisma/client";
 
 const formSchema = z.object({
-  query: z
+  messages: z
     .string()
     .min(1, {
       message: "Enter a question.",
@@ -29,12 +30,16 @@ const formSchema = z.object({
     .max(255),
 });
 
-const ChatForm = () => {
+interface ChatFormProps {
+  article: Article;
+}
+
+const ChatForm = ({ article }: ChatFormProps) => {
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      query: "",
+      messages: "",
     },
   });
 
@@ -42,7 +47,10 @@ const ChatForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await axios.post("/api/articles/chat", values);
+      const response = await axios.post(
+        `/api/articles/${article.id}/chat`,
+        values
+      );
       toast.success("chat message sent!");
       router.refresh();
     } catch {
@@ -59,7 +67,7 @@ const ChatForm = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 mt-2">
           <FormField
             control={form.control}
-            name="query"
+            name="messages"
             render={({ field }) => (
               <FormItem>
                 {/* <FormLabel>Ask AI</FormLabel> */}
