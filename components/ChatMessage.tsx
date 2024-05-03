@@ -14,6 +14,7 @@ const ChatMessage = ({ name, imageUrl, message, role }: ChatMessageProps) => {
         <div className="relative h-[40px] w-[40px]">
           <Image
             src={imageUrl}
+            priority
             alt={name}
             fill
             className="rounded-full self-center"
@@ -34,6 +35,7 @@ const ChatMessage = ({ name, imageUrl, message, role }: ChatMessageProps) => {
           <Image
             src={imageUrl}
             alt={name}
+            priority
             fill
             className="rounded-full self-center"
           />
