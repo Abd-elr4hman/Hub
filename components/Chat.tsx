@@ -50,6 +50,7 @@ export default function Chat({ article, user }: ChatProps) {
       {messages.slice(2).map((m) => (
         <div className="my-2">
           <ChatMessage
+            key={m.id}
             name={m.role === "user" ? `${user.name}` : "AI"}
             imageUrl={m.role === "user" ? `${user.imageUrl}` : "/profile.jpg"}
             message={m.content}

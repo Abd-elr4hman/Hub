@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 interface ChatMessageProps {
+  key: string;
   name: string;
   imageUrl: string;
   message: string;
