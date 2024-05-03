@@ -5,14 +5,25 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import Back from "./_components/Back";
 import ArticleActions from "./_components/Actions";
-import ChatForm from "@/components/ChatForm";
 import Chat from "@/components/Chat";
+import { currentUser } from "@clerk/nextjs/server";
 
 const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
   const { userId } = auth();
   if (!userId) {
     return redirect("/articles");
   }
+
+  const user = await currentUser();
+  if (!user) {
+    return redirect("/articles");
+  }
+
+  const userInfo = {
+    name: user.firstName,
+    hasImage: user.hasImage,
+    imageUrl: user.imageUrl,
+  };
 
   const article = await db.article.findUnique({
     where: {
@@ -59,7 +70,7 @@ const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
       </div>
       <div className="h-full hidden xl:block xl:relative w-2/5 mt-10 mx-5 ">
         {/* <ChatForm article={article} /> */}
-        <Chat article={article} />
+        <Chat article={article} user={userInfo} />
       </div>
     </div>
   );

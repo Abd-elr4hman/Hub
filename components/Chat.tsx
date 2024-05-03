@@ -2,12 +2,20 @@
 
 import { Article } from "@prisma/client";
 import { useChat, Message } from "ai/react";
+import ChatMessage from "./ChatMessage";
+
+type UserInfo = {
+  name: string | null;
+  hasImage: boolean;
+  imageUrl: string;
+};
 
 interface ChatProps {
   article: Article;
+  user: UserInfo;
 }
 
-export default function Chat({ article }: ChatProps) {
+export default function Chat({ article, user }: ChatProps) {
   const options = {
     api: `/api/articles/${article.id}/chat`,
     initialMessages: [
@@ -40,9 +48,17 @@ export default function Chat({ article }: ChatProps) {
         />
       </form>
       {messages.slice(2).map((m) => (
-        <div key={m.id} className="whitespace-pre-wrap">
-          {m.role === "user" ? "User: " : "AI: "}
-          {m.content}
+        <div key={m.id} className="my-2">
+          <ChatMessage
+            name={m.role === "user" ? `${user.name}` : "AI"}
+            imageUrl={m.role === "user" ? `${user.imageUrl}` : "/profile.jpg"}
+            message={m.content}
+            role={m.role}
+          />
+          {/* <div key={m.id} className="whitespace-pre-wrap">
+            {m.role === "user" ? `${user.name}:  ` : "AI: "}
+            {m.content}
+          </div> */}
         </div>
       ))}
     </div>
