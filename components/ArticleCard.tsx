@@ -37,6 +37,7 @@ const ArticleCard = async ({
           <div className="relative w-full rounded-md aspect-video overflow-hidden">
             <Image
               fill
+              priority
               placeholder="blur"
               blurDataURL={base64}
               className="object-cover"
