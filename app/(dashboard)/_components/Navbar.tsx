@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Navbar = () => {
   return (
-    <div className="p-4 h-[60] flex items-center justify-between shadow-sm ">
+    <div className="p-4 h-[60] min-h-20 flex items-center justify-between shadow-sm">
       <MobileSidebar></MobileSidebar>
       <NavebarRoutes></NavebarRoutes>
       {/* <TeacherModeSwitch></TeacherModeSwitch> */}
