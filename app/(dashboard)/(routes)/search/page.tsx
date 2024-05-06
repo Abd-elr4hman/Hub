@@ -6,6 +6,11 @@ import CoursesList from "@/components/CoursesList";
 import { db } from "@/lib/db";
 import Categories from "./_components/Categories";
 import PageInput from "@/components/PageInput";
+import { Suspense } from "react";
+import { title } from "process";
+import page from "../teacher/analytics/page";
+import { unstable_noStore } from "next/cache";
+import Skeleton from "./_components/Skeleton";
 
 interface SearchPageProps {
   searchParams: {
@@ -14,6 +19,33 @@ interface SearchPageProps {
     page: number;
   };
 }
+
+const CoursesFetcher = async (
+  searchParams: {
+    title: string;
+    categoryId?: string;
+    page: number;
+  },
+  userId: string
+) => {
+  unstable_noStore();
+  const pageSize = 8;
+
+  const { coursesWithProgressWithCategory, coursesCount } = await GetCourses({
+    userId,
+    ...searchParams,
+    pageSize,
+  });
+
+  return (
+    <div>
+      <CoursesList items={coursesWithProgressWithCategory} />
+      <div className="mt-auto">
+        <PageInput itemCount={coursesCount} />
+      </div>
+    </div>
+  );
+};
 
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
   const { userId } = auth();
@@ -28,25 +60,19 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
   });
 
   const pageSize = 8;
-  const { coursesWithProgressWithCategory, coursesCount } = await GetCourses({
-    userId,
-    ...searchParams,
-    pageSize,
-  });
-
+  const keyString = `title=${searchParams?.title}&&categoryId=${searchParams?.categoryId}&&page=${searchParams?.page}&&pageSize=${pageSize}`; //  <-- Construct key from searchParams
   return (
-    <div className="h-full flex flex-col mb-12 ">
+    <section className="h-full flex flex-col mb-12 ">
       <div className="px-6 pt-6 md:hidden md:mb-0 block">
         <SearchInput placeholder="Search Courses" />
       </div>
       <div className="p-6 space-y-4 ">
         <Categories items={categories} />
-        <CoursesList items={coursesWithProgressWithCategory} />
+        <Suspense key={keyString} fallback={<Skeleton />}>
+          <CoursesFetcher {...searchParams} />
+        </Suspense>
       </div>
-      <div className="mt-auto">
-        <PageInput itemCount={coursesCount} />
-      </div>
-    </div>
+    </section>
   );
 };
 
