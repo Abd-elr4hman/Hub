@@ -16,6 +16,8 @@ const SearchInput = ({ placeholder }: SearchInputProps) => {
   const debouncedValue = useDebounce(value);
 
   const searchParams = useSearchParams();
+  const currentCategoryId = searchParams.get("categoryId");
+
   const router = useRouter();
   const pathname = usePathname();
 
@@ -25,6 +27,7 @@ const SearchInput = ({ placeholder }: SearchInputProps) => {
         url: pathname,
         query: {
           title: debouncedValue,
+          categoryId: currentCategoryId,
         },
       },
       { skipEmptyString: true, skipNull: true }

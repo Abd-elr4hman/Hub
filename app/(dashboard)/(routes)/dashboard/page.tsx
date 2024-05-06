@@ -6,12 +6,10 @@ import { CheckCircle, Clock, Bookmark } from "lucide-react";
 import InfoCard from "./_components/InfoCard";
 import { db } from "@/lib/db";
 import ArticleList from "@/components/ArticleList";
+import { Suspense } from "react";
+import Skeleton from "./_components/Skeleton";
 
-export default async function Dashboard() {
-  const { userId } = auth();
-  if (!userId) {
-    return redirect("/");
-  }
+const DashboardFetcher = async ({ userId }: { userId: string }) => {
   const { completedCourses, coursesInProgress } = await getDashboardCourses(
     userId
   );
@@ -73,6 +71,21 @@ export default async function Dashboard() {
           gridStyle="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-4"
         />
       </div>
+    </div>
+  );
+};
+
+export default async function Dashboard() {
+  const { userId } = auth();
+  if (!userId) {
+    return redirect("/");
+  }
+
+  return (
+    <div>
+      <Suspense fallback={<Skeleton />}>
+        <DashboardFetcher userId={userId} />
+      </Suspense>
     </div>
   );
 }

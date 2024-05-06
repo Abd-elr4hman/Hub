@@ -2,6 +2,7 @@ import { Category, Course } from "@prisma/client";
 
 import getProgress from "./get-progress";
 import { db } from "@/lib/db";
+import { unstable_noStore } from "next/cache";
 
 type CourseWithProgressWithCategory = Course & {
   category: Category | null;
@@ -30,6 +31,7 @@ export const GetCourses = async ({
   pageSize,
 }: GetCourses): Promise<CoursesWithProgressWithCategoryWithCount> => {
   try {
+    unstable_noStore();
     const skipCount = page && page > 0 ? (page - 1) * pageSize : 0;
 
     const courses = await db.course.findMany({
