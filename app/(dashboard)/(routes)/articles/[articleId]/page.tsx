@@ -7,6 +7,7 @@ import Back from "./_components/Back";
 import ArticleActions from "./_components/Actions";
 import Chat from "@/components/Chat";
 import { currentUser } from "@clerk/nextjs/server";
+import Animate from "@/components/Animate";
 
 const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
   const { userId } = auth();
@@ -46,33 +47,35 @@ const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
   });
 
   return (
-    <div className="flex justify-between ">
-      <div className="flex flex-col max-w-2xl mx-auto w-full ">
-        <div className=" fixed top-30 left-30 z-40 w-[inherit] max-w-[inherit] bg-white">
-          <div className="flex items-center justify-between">
-            <Back link="/articles" text="Back to Articles" />
-            <ArticleActions
-              articleId={article.id}
-              isSaved={articleSave ? true : false}
-            />
+    <Animate>
+      <div className="flex justify-between ">
+        <div className="flex flex-col max-w-2xl mx-auto w-full ">
+          <div className=" fixed top-30 left-30 z-40 w-[inherit] max-w-[inherit] bg-white">
+            <div className="flex items-center justify-between">
+              <Back link="/articles" text="Back to Articles" />
+              <ArticleActions
+                articleId={article.id}
+                isSaved={articleSave ? true : false}
+              />
+            </div>
+          </div>
+          <div className="relative aspect-video mt-10">
+            <Image fill src={article?.imageUrl!} alt={article?.title!} />
+          </div>
+
+          <div className="flex justify-center px-4">
+            <h2 className="font-bold text-4xl">{article.title}</h2>
+          </div>
+          <div className="flex justify-center text-6xl">
+            <Preview value={article.body!} style="" />
           </div>
         </div>
-        <div className="relative aspect-video mt-10">
-          <Image fill src={article?.imageUrl!} alt={article?.title!} />
-        </div>
-
-        <div className="flex justify-center px-4">
-          <h2 className="font-bold text-4xl">{article.title}</h2>
-        </div>
-        <div className="flex justify-center text-6xl">
-          <Preview value={article.body!} style="" />
+        <div className="h-full hidden xl:block xl:relative w-2/5 mt-10 mx-5 ">
+          {/* <ChatForm article={article} /> */}
+          <Chat article={article} user={userInfo} />
         </div>
       </div>
-      <div className="h-full hidden xl:block xl:relative w-2/5 mt-10 mx-5 ">
-        {/* <ChatForm article={article} /> */}
-        <Chat article={article} user={userInfo} />
-      </div>
-    </div>
+    </Animate>
   );
 };
 
