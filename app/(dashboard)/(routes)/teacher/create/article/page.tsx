@@ -58,7 +58,7 @@ const CreateArticle = () => {
         <h1 className="text-2xl">Title your article</h1>
         <p className="text-sm text-slate-600">
           {
-            "What would you like to name your course? Don't worry, you can change this later."
+            "What would you like to name your article? Don't worry, you can change this later."
           }
         </p>
         <Form {...form}>

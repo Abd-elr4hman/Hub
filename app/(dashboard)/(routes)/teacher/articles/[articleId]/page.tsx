@@ -67,7 +67,7 @@ const ArticleEditPage = async ({ params }: ArticleIdPageInterface) => {
       <div className="p-6">
         <div className="flex items-center gap-x-2">
           <LayoutDashboard></LayoutDashboard>
-          <h2 className="text-xl">Customize your course</h2>
+          <h2 className="text-xl">Customize your article</h2>
         </div>
         <TitleForm initialData={article} articleId={article.id}></TitleForm>
         <BodyForm initialData={article} articleId={article.id}></BodyForm>

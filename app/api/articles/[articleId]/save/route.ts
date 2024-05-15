@@ -15,7 +15,6 @@ export async function POST(
     const article = await db.article.findUnique({
       where: {
         id: params.articleId,
-        userId,
         isPublished: true,
       },
     });
