@@ -1,5 +1,5 @@
 # Hub 
-Is an LMS platform, aims to help Educators, Teachers and Teaching service providers set up their platform, get up and running quickly with an LMS template. This repo offers variouse features including:
+Is an LMS platform, aims to help Educators, Teachers and Teaching service providers set up their platform, get up and running quickly with an LMS template. This repo offers various features including:
 ### 1. Teacher Board to add courses and articles.
 
 https://github.com/Abd-elr4hman/Hub/assets/87248009/afa2acf4-5e12-487f-821a-ea0acbcbcf91
