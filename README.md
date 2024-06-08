@@ -31,7 +31,7 @@ Hub has an integrated AI companion with chat tab across platform, features:
 https://github.com/Abd-elr4hman/Hub/assets/87248009/32ac8bb4-9c34-419b-8fa2-d2de8d15f253
 
 # Content-Based Recommendations
-![image](https://github.com/Abd-elr4hman/Hub/assets/87248009/335f2211-bac1-4435-b0df-97848642376d)
+![recommendations](https://github.com/Abd-elr4hman/Hub/assets/87248009/03989826-c8f9-48d7-a29a-8c7943332abb)
 
 
 ## Acknowledgement
