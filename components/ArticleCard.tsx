@@ -7,20 +7,16 @@ import Preview from "./Preview";
 import { getPlaiceholder } from "plaiceholder";
 
 interface ArticleCardProps {
-  key: string;
   id: string;
   title: string;
-  body: string;
   imageUrl: string;
   createdAt: Date;
   truncate?: number;
 }
 
 const ArticleCard = async ({
-  key,
   id,
   title,
-  body,
   imageUrl,
   createdAt,
   truncate,

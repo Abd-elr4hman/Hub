@@ -2,8 +2,16 @@ import React from "react";
 import ArticleCard from "./ArticleCard";
 import { Article } from "@prisma/client";
 
+type ArticleCardInfo = {
+  id: string;
+  userId: string;
+  title: string;
+  imageUrl: string | null;
+  createdAt: Date;
+};
+
 interface ArticleListProps {
-  items: Article[];
+  items: ArticleCardInfo[];
   gridStyle?: string;
   truncate?: number;
 }
@@ -23,7 +31,6 @@ const ArticleList = ({ items, gridStyle, truncate }: ArticleListProps) => {
             key={item.id}
             id={item.id}
             title={item.title}
-            body={item.body!}
             imageUrl={item.imageUrl!}
             createdAt={item.createdAt}
             truncate={truncate ? truncate : 100}
