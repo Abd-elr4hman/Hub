@@ -16,6 +16,14 @@ interface ArticlePageProps {
   };
 }
 
+type ArticleCardInfo = {
+  id: string;
+  userId: string;
+  title: string;
+  imageUrl: string | null;
+  createdAt: Date;
+};
+
 const ArticleFetcher = async (
   searchParams: {
     title: string;
@@ -33,7 +41,7 @@ const ArticleFetcher = async (
   const skipCount = page ? (page - 1) * pageSize : 0;
   const take = pageSize ? pageSize : 8;
 
-  const articles = await db.article.findMany({
+  const articles: ArticleCardInfo[] = await db.article.findMany({
     skip: skipCount,
     take: take,
     where: {
@@ -41,6 +49,13 @@ const ArticleFetcher = async (
       title: {
         contains: searchParams.title,
       },
+    },
+    select: {
+      id: true,
+      userId: true,
+      title: true,
+      imageUrl: true,
+      createdAt: true,
     },
   });
 
