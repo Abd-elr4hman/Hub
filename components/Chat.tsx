@@ -49,7 +49,7 @@ export default function Chat({ article, user }: ChatProps) {
           />
         </form>
       </div>
-      <div className="flex flex-col-reverse w-full max-w-md mx-auto stretch fixed border shadow-lg rounded-lg max-h-[500px] overflow-x-auto overflow-y-auto bg-slate-200">
+      <div className="flex flex-col-reverse w-full max-w-md mx-auto stretch fixed border shadow-lg rounded-lg max-h-[400px] overflow-x-auto overflow-y-auto bg-slate-200 ">
         <div className="mt-40 px-4">
           {messages.slice(2).map((m) => (
             <div key={m.id} className="my-2">
