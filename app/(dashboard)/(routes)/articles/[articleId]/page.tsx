@@ -85,12 +85,12 @@ const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
 
         {recommendations.length !== 0 && (
           <div className="w-full max-w-md mx-auto ">
-            <div className="fixed z-50  w-[inherit] max-w-[inherit] pt-2 px-4  bottom-0 right-120">
+            <div className="fixed z-50  w-[inherit] max-w-[inherit] max-h-[300px] pt-2 px-4  overflow-x-auto overflow-y-auto">
               <h1 className="text-2xl ml-4">Similar Articles</h1>
               <div className="p-6">
                 <ArticleList
                   items={recommendations}
-                  truncate={50}
+                  truncate={20}
                   gridStyle="grid grid-cols-2 gap-2"
                 />
               </div>
