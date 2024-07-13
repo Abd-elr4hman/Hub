@@ -81,7 +81,7 @@ const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
         {recommendations.length !== 0 && (
           <div className="w-full mx-auto ">
             <div className="pt-2 overflow-x-auto overflow-y-auto">
-              <h1 className="text-2xl font-bold ml-4">Recommended Articles</h1>
+              <h1 className="text-2xl font-bold ml-4">Related Articles</h1>
               <div className="p-6">
                 <ArticleList
                   items={recommendations}
