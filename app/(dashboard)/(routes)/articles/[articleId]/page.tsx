@@ -78,15 +78,10 @@ const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
         <div className="flex justify-center text-6xl">
           <Preview value={article.body!} style="" />
         </div>
-      </div>
-      <div className="h-full hidden xl:block xl:relative w-2/5 mt-10 mx-5">
-        {/* <ChatForm article={article} /> */}
-        <Chat article={article} user={userInfo} />
-
         {recommendations.length !== 0 && (
-          <div className="w-full max-w-md mx-auto ">
-            <div className="fixed z-50  w-[inherit] max-w-[inherit] max-h-[300px] pt-2 px-4  overflow-x-auto overflow-y-auto">
-              <h1 className="text-2xl ml-4">Similar Articles</h1>
+          <div className="w-full mx-auto ">
+            <div className="pt-2 overflow-x-auto overflow-y-auto">
+              <h1 className="text-2xl font-bold ml-4">Recommended Articles</h1>
               <div className="p-6">
                 <ArticleList
                   items={recommendations}
@@ -97,6 +92,10 @@ const ArticleIdPage = async ({ params }: { params: { articleId: string } }) => {
             </div>
           </div>
         )}
+      </div>
+      <div className="h-full hidden xl:block xl:relative w-2/5 mt-10 mx-5">
+        {/* <ChatForm article={article} /> */}
+        <Chat article={article} user={userInfo} />
       </div>
     </div>
   );

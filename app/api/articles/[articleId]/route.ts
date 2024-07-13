@@ -42,6 +42,7 @@ export async function PATCH(
             {
               embedding: embedding,
               prisma_id: articleId,
+              title: values.title,
             },
             { onConflict: "prisma_id" }
           )
