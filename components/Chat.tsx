@@ -27,7 +27,7 @@ export default function Chat({ article, user }: ChatProps) {
       {
         id: Date.now().toString(),
         role: "system" as const,
-        content: `Your goal is to assist the student in asnwering questions regarding the following text article, answer in short sentences, keep your answer concise, very short and respond with questions to test the student knowledge as you move on, try to break down ideas in an easy manner and respond with very short answers and follow up questions. Article: ${article.title} ${article.body}`,
+        content: `Your goal is to guide the student through an article, answer in short sentences, keep your answer concise, very short, address only one idea at a time, respond with questions to test the student knowledge as you move on, try to break down ideas in an easy manner and respond with very short answers and follow up question. Article: ${article.title} ${article.body}`,
       },
     ],
   };
